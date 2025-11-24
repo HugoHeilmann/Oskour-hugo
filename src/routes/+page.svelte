@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+  import Card from '$lib/components/Card/Card.svelte';
+
+  const title = "Bienvenue sur ma page Svelte !";
+  const message = "Ceci est un exemple avec un composant séparé."
+</script>
+
+<h1>{title}</h1>
+
+<Card text={message} />
