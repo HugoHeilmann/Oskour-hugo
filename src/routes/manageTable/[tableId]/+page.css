@@ -1,0 +1,60 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background:
+        radial-gradient(circle at 20% 20%, #587a1b 0, #587a1b 35%, transparent 40%),
+        radial-gradient(circle at 80% 40%, #b66527 0, #b66527 35%, transparent 40%),
+        radial-gradient(circle at 40% 80%, #3b5a1a 0, #3b5a1a 40%, transparent 45%),
+        #4a3b26;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.dishes {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    gap: 12px;
+    padding: 12px;
+}
+
+.bottom-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+}
+
+.code-input {
+    width: 90%;
+    place-self: center;
+    margin: 12px 0;
+    padding: 10px 14px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    background: #e5e5e5;
+    font-size: 0.95rem;
+    color: #222;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.code-input::placeholder {
+    color: #888;
+    opacity: 1;
+}
+
+.code-input:focus {
+    box-shadow: 0 0 6px rgba(255,255,255,0.4);
+}

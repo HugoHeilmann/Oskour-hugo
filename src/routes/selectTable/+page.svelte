@@ -1,5 +1,7 @@
 <script>
     import './+page.css';
+    import { goto } from '$app/navigation';
+
     import Title from '$lib/components/Title/Title.svelte';
     import Keypad from '$lib/components/Keypad/Keypad.svelte';
     import RoomSelector from '$lib/components/RoomSelector/RoomSelector.svelte';
@@ -68,21 +70,17 @@
 
         <Keypad {pressKey} />
 
-        <button type="submit" class="confirm-button" disabled={tableNumber.length === 0}>
+        <button type="submit" class="confirm-button" disabled={tableNumber.length === 0}
+            on:click={() => goto(`/manageTable/${tableNumber}`)}
+        >
           Confirmer
         </button>
       </div>
 
     {:else}
-      <!-- MODE NOVICE : pour l’instant, aucune carte, juste un petit placeholder -->
+      <!-- MODE NOVICE : demande de la salle puis map pour choisir la table -->
       <div class="novice-first-step">
-        <!-- Partie 1 : choix de la salle -->
         <RoomSelector />
-
-        <!-- Partie 2 : carte de la salle (TODO) -->
-         <div class="novice-second-step">
-            <p>Etape suivante a venir...</p>
-         </div>
       </div>
     {/if}
   </section>
