@@ -1,6 +1,7 @@
 <script>
     import "./CommandRecap.css"
     import mockCommands from "../../data/mockCommand.json"
+    import PaymentButton from "../PaymentButton/PaymentButton.svelte"
 
     export let commandId = 1; // ID de la commande à afficher
     
@@ -46,4 +47,6 @@
             <span class="total-amount">{total.toFixed(2)}€</span>
         </div>
     </div>
+    
+    <PaymentButton commandId={commandId} />
 </div>

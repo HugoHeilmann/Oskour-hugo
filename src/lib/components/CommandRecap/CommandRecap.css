@@ -24,24 +24,52 @@
 
 .items-list {
     margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background: white;
+}
+
+/* Style de la scrollbar */
+.items-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.items-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.items-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.items-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
 
 .header-row {
     display: grid;
     grid-template-columns: 2fr 80px 100px 100px;
     gap: 10px;
-    padding: 10px 0;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
     color: #666;
     font-size: 14px;
+    background: #f8f9fa;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .item-row {
     display: grid;
     grid-template-columns: 2fr 80px 100px 100px;
     gap: 10px;
-    padding: 12px 0;
+    padding: 12px 10px;
     border-bottom: 1px solid #eee;
     align-items: center;
 }

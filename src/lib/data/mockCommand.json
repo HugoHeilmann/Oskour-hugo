@@ -96,5 +96,131 @@
         "note": ""
       }
     ]
+  },
+  {
+    "commandId": 4,
+    "tableNumber": 15,
+    "items": [
+      {
+        "id": 11,
+        "name": "Soupe à l'oignon",
+        "quantity": 2,
+        "price": 8.50,
+        "category": "plat",
+        "note": "extra fromage"
+      },
+      {
+        "id": 12,
+        "name": "Escargots de Bourgogne",
+        "quantity": 1,
+        "price": 16.00,
+        "category": "plat",
+        "note": "6 pièces"
+      },
+      {
+        "id": 13,
+        "name": "Coq au Vin",
+        "quantity": 3,
+        "price": 22.00,
+        "category": "plat",
+        "note": "bien cuit"
+      },
+      {
+        "id": 14,
+        "name": "Ratatouille",
+        "quantity": 2,
+        "price": 12.00,
+        "category": "plat",
+        "note": ""
+      },
+      {
+        "id": 15,
+        "name": "Bouillabaisse",
+        "quantity": 1,
+        "price": 28.00,
+        "category": "plat",
+        "note": "sans croutons"
+      },
+      {
+        "id": 16,
+        "name": "Champagne",
+        "quantity": 1,
+        "price": 45.00,
+        "category": "boisson",
+        "note": "Veuve Clicquot"
+      },
+      {
+        "id": 17,
+        "name": "Vin Blanc",
+        "quantity": 2,
+        "price": 18.00,
+        "category": "boisson",
+        "note": "Sancerre"
+      },
+      {
+        "id": 18,
+        "name": "Café Espresso",
+        "quantity": 4,
+        "price": 3.50,
+        "category": "boisson",
+        "note": ""
+      },
+      {
+        "id": 19,
+        "name": "Thé Earl Grey",
+        "quantity": 2,
+        "price": 4.00,
+        "category": "boisson",
+        "note": "avec citron"
+      },
+      {
+        "id": 20,
+        "name": "Crème Brûlée",
+        "quantity": 3,
+        "price": 8.00,
+        "category": "dessert",
+        "note": ""
+      },
+      {
+        "id": 21,
+        "name": "Profiteroles",
+        "quantity": 2,
+        "price": 9.50,
+        "category": "dessert",
+        "note": "chocolat chaud"
+      },
+      {
+        "id": 22,
+        "name": "Tarte Tatin",
+        "quantity": 1,
+        "price": 7.50,
+        "category": "dessert",
+        "note": "avec glace vanille"
+      },
+      {
+        "id": 23,
+        "name": "Mousse au Chocolat",
+        "quantity": 2,
+        "price": 6.50,
+        "category": "dessert",
+        "note": "chocolat noir 70%"
+      },
+      {
+        "id": 24,
+        "name": "Fromage de Chèvre",
+        "quantity": 1,
+        "price": 11.00,
+        "category": "plat",
+        "note": "avec miel"
+      },
+      {
+        "id": 25,
+        "name": "Pain Artisanal",
+        "quantity": 3,
+        "price": 2.50,
+        "category": "plat",
+        "note": "baguette tradition"
+      }
+    ]
   }
 ]
