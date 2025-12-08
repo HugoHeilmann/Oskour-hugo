@@ -6,6 +6,15 @@
     const GRID_COLS = 4;
     const GRID_ROWS = 8;
 
+    /** @type {Record<string, { label: string, number: number }>} */
+    const map = {
+        'salle-1': { label: 'Salle 1', number: 1 },
+        'salle-2': { label: 'Salle 2', number: 2 },
+        'salle-3': { label: 'Salle 3', number: 3 },
+        'terrasse': { label: 'Terrasse', number: 4 },
+        'salon-prive': { label: 'Salon privé', number: 5 }
+    };
+
     /** @type {string} */
     let roomId = '';
 
@@ -17,15 +26,14 @@
      * @param {string} id
      */
     function getRoomLabel(id) {
-        /** @type {Record<string, string>} */
-        const map = {
-            'salle-1': 'Salle 1',
-            'salle-2': 'Salle 2',
-            'salle-3': 'Salle 3',
-            'terrasse': 'Terrasse',
-            'salon-prive': 'Salon privé'
-        };
-        return map[id] ?? id;
+        return map[id].label ?? id;
+    }
+
+    /**
+     * @param {string} id
+     */
+    function getRoomNumber(id) {
+        return map[id].number ?? id;
     }
 
     // Petit hash déterministe
