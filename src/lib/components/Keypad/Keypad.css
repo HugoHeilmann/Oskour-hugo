@@ -1,0 +1,40 @@
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 260px;
+}
+
+.key {
+    border: none;
+    border-radius: 10px;
+    padding: 0.9rem 0;
+    background: rgba(240, 240, 240, 0.95);
+    color: #222;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out,
+        background 0.15s ease-out;
+}
+
+.key:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    background: #e0e0e0;
+}
+
+.key-clear {
+    grid-column: 1 / -1;
+    background: rgba(170, 50, 50, 0.95);
+    color: #fff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.key-clear:active {
+    background: rgba(140, 30, 30, 0.95);
+}
