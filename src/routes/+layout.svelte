@@ -11,15 +11,19 @@
 {@render children()}
 
 <style>
-    :global(html, body) {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
+:root {
+        --bg-main: rgb(22, 27, 34);
+        --bg-card: rgb(33, 40, 48);
+        
+        --accent-gold: rgb(197, 160, 101);
+        --accent-gold-dim: rgba(197, 160, 101, 0.2);
+        
+        --text-main: rgb(240, 240, 240);
+        --text-muted: rgb(160, 170, 180);
     }
 
-    :global(#svelte) {
-        width: 100%;
-        height: 100%;
+    :global(html, body) {
+        background-color: var(--bg-main);
+        color: var(--text-main);
     }
 </style>
