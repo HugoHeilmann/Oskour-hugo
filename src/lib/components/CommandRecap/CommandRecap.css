@@ -24,7 +24,7 @@
 
 .items-list {
     margin-bottom: 20px;
-    max-height: 400px;
+    max-height: 270px;
     overflow-y: auto;
     border: 1px solid #eee;
     border-radius: 4px;
@@ -51,23 +51,22 @@
 }
 
 .header-row {
-    display: grid;
-    grid-template-columns: 2fr 60px 80px 80px;
-    gap: 5px;
+    position: sticky;
+    display: flex;
+    place-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
     color: #666;
     font-size: 14px;
     background: #f8f9fa;
-    position: sticky;
-    top: 0;
     z-index: 10;
 }
 
 .item-row {
-    display: grid;
-    grid-template-columns: 2fr 60px 80px 80px;
+    max-height: 70px;
+    display: flex;
+    justify-content: space-between;
     gap: 5px;
     padding: 12px 10px;
     border-bottom: 1px solid #eee;
@@ -79,12 +78,14 @@
 }
 
 .item-info {
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
 .item-name {
+    width: 40%;
     font-weight: 500;
     color: #333;
 }
@@ -113,18 +114,14 @@
     color: #f57c00;
 }
 
-.item-note {
-    font-size: 12px;
-    color: #666;
-    font-style: italic;
-}
-
 .item-quantity {
+    width: 20%;
     text-align: center;
     font-weight: 500;
 }
 
 .item-price, .item-total {
+    width: 20%;
     text-align: right;
     font-weight: 500;
 }

@@ -30,9 +30,6 @@
                 <div class="item-info">
                     <span class="item-name">{item.name}</span>
                     <span class="item-category category-{item.category}">{item.category}</span>
-                    {#if item.note}
-                        <span class="item-note">({item.note})</span>
-                    {/if}
                 </div>
                 <span class="item-quantity">{item.quantity}</span>
                 <span class="item-price">{item.price.toFixed(2)}€</span>

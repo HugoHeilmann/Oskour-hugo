@@ -1,5 +1,6 @@
 <script>
-    import "./MobilePayment.css";
+    import PaymentHeader from "../PaymentHeader/PaymentHeader.svelte";
+import "./MobilePayment.css";
     
     export let amount = 0;
     export let onBack = () => {};
@@ -40,11 +41,7 @@
 </script>
 
 <div class="mobile-payment">
-    <div class="payment-header">
-        <button class="back-button" on:click={onBack}>← Retour</button>
-        <h2>Paiement mobile</h2>
-        <div class="amount">Montant: {amount.toFixed(2)}€</div>
-    </div>
+    <PaymentHeader {onBack} method={"Paiement mobile"} {amount}  />
     
     {#if !selectedMethod}
         <div class="method-selection">

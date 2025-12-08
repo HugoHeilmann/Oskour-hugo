@@ -1,5 +1,6 @@
 <script>
-    import "./CashPayment.css";
+    import PaymentHeader from "../PaymentHeader/PaymentHeader.svelte";
+import "./CashPayment.css";
     
     export let amount = 0;
     export let onBack = () => {};
@@ -43,11 +44,7 @@
 </script>
 
 <div class="cash-payment">
-    <div class="payment-header">
-        <button class="back-button" on:click={onBack}>← Retour</button>
-        <h2>Paiement en espèces</h2>
-        <div class="amount">Montant à payer: {amount.toFixed(2)}€</div>
-    </div>
+    <PaymentHeader {onBack} method={"Paiement en especes"} {amount}  />
     
     <div class="cash-form">
         <div class="amount-input-section">

@@ -1,5 +1,6 @@
 <script>
-    import "./CardPayment.css";
+    import PaymentHeader from "../PaymentHeader/PaymentHeader.svelte";
+import "./CardPayment.css";
     
     export let amount = 0;
     export let onBack = () => {};
@@ -61,11 +62,7 @@
 </script>
 
 <div class="card-payment">
-    <div class="payment-header">
-        <button class="back-button" on:click={onBack}>← Retour</button>
-        <h2>Paiement par carte</h2>
-        <div class="amount">Montant: {amount.toFixed(2)}€</div>
-    </div>
+    <PaymentHeader {onBack} method={"Paiement par carte"} {amount}  />
     
     <div class="card-form">
         <div class="form-group">
