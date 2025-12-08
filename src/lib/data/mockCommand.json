@@ -1,0 +1,100 @@
+[
+  {
+    "commandId": 1,
+    "tableNumber": 5,
+    "items": [
+      {
+        "id": 1,
+        "name": "Burger Classic",
+        "quantity": 2,
+        "price": 12.50,
+        "category": "plat",
+        "note": "sans cornichons"
+      },
+      {
+        "id": 2,
+        "name": "Frites",
+        "quantity": 2,
+        "price": 4.00,
+        "category": "plat",
+        "note": ""
+      },
+      {
+        "id": 3,
+        "name": "Coca-Cola",
+        "quantity": 3,
+        "price": 2.50,
+        "category": "boisson",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "commandId": 2,
+    "tableNumber": 12,
+    "items": [
+      {
+        "id": 4,
+        "name": "Steak de Bœuf",
+        "quantity": 1,
+        "price": 18.00,
+        "category": "plat",
+        "note": "saignant"
+      },
+      {
+        "id": 5,
+        "name": "Tarte aux Pommes",
+        "quantity": 2,
+        "price": 6.50,
+        "category": "dessert",
+        "note": "avec crème fraîche"
+      },
+      {
+        "id": 6,
+        "name": "Vin Rouge",
+        "quantity": 1,
+        "price": 15.00,
+        "category": "boisson",
+        "note": "Bordeaux"
+      }
+    ]
+  },
+  {
+    "commandId": 3,
+    "tableNumber": 8,
+    "items": [
+      {
+        "id": 7,
+        "name": "Pizza Margherita",
+        "quantity": 1,
+        "price": 14.00,
+        "category": "plat",
+        "note": "pâte fine"
+      },
+      {
+        "id": 8,
+        "name": "Salade César",
+        "quantity": 1,
+        "price": 11.00,
+        "category": "plat",
+        "note": "sans croûtons"
+      },
+      {
+        "id": 9,
+        "name": "Eau Pétillante",
+        "quantity": 2,
+        "price": 3.00,
+        "category": "boisson",
+        "note": ""
+      },
+      {
+        "id": 10,
+        "name": "Tiramisu",
+        "quantity": 2,
+        "price": 7.50,
+        "category": "dessert",
+        "note": ""
+      }
+    ]
+  }
+]
