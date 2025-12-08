@@ -1,0 +1,273 @@
+.mobile-payment {
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.back-button, .reset-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.reset-button {
+    position: relative;
+    transform: none;
+    margin-bottom: 20px;
+}
+
+.back-button:hover, .reset-button:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.payment-header h2 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.method-selection {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.method-selection h3 {
+    margin: 0 0 25px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.mobile-methods {
+    display: grid;
+    gap: 15px;
+}
+
+.method-option {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.method-option:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+    transform: translateY(-2px);
+}
+
+.method-icon {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.method-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.payment-process {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.selected-method {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.method-display {
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    padding: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selected-icon {
+    font-size: 24px;
+}
+
+.selected-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.qr-section {
+    text-align: center;
+}
+
+.qr-code {
+    margin: 20px auto;
+    display: inline-block;
+    position: relative;
+}
+
+.qr-placeholder {
+    width: 200px;
+    height: 200px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.qr-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(0deg, #000, #000 2px, transparent 2px, transparent 8px),
+        repeating-linear-gradient(90deg, #000, #000 2px, transparent 2px, transparent 8px);
+    opacity: 0.8;
+}
+
+.qr-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.qr-instruction {
+    color: #666;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.simulate-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.simulate-button:hover {
+    background: #5a67d8;
+}
+
+.processing-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.processing-animation {
+    position: relative;
+    margin: 0 auto 30px;
+    width: 80px;
+    height: 80px;
+}
+
+.pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #667eea;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.processing-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.processing-section h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.processing-section p {
+    color: #666;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mobile-payment {
+        padding: 20px;
+    }
+    
+    .method-selection, .payment-process {
+        padding: 20px;
+    }
+    
+    .payment-header h2 {
+        font-size: 20px;
+    }
+    
+    .back-button {
+        position: relative;
+        margin-bottom: 15px;
+        transform: none;
+    }
+    
+    .qr-placeholder {
+        width: 150px;
+        height: 150px;
+    }
+}

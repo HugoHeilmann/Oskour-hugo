@@ -1,0 +1,216 @@
+.cash-payment {
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.payment-header h2 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.cash-form {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.amount-input-section {
+    margin-bottom: 25px;
+}
+
+.amount-input-section label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.input-with-button {
+    display: flex;
+    gap: 10px;
+}
+
+.amount-input-section input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 18px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.amount-input-section input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.exact-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.exact-button:hover {
+    background: #5a67d8;
+}
+
+.quick-amounts h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.amount-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.amount-buttons button {
+    background: white;
+    border: 2px solid #e0e0e0;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.amount-buttons button:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.change-section {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.change-section.positive {
+    background: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.change-label {
+    color: #856404;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.change-section.positive .change-label {
+    color: #0c5460;
+}
+
+.change-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #856404;
+}
+
+.change-section.positive .change-amount {
+    color: #0c5460;
+}
+
+.confirm-button {
+    width: 100%;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.confirm-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+.confirm-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cash-payment {
+        padding: 20px;
+    }
+    
+    .cash-form {
+        padding: 20px;
+    }
+    
+    .amount-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .payment-header h2 {
+        font-size: 20px;
+    }
+    
+    .back-button {
+        position: relative;
+        margin-bottom: 15px;
+        transform: none;
+    }
+    
+    .input-with-button {
+        flex-direction: column;
+    }
+}

@@ -52,8 +52,8 @@
 
 .header-row {
     display: grid;
-    grid-template-columns: 2fr 80px 100px 100px;
-    gap: 10px;
+    grid-template-columns: 2fr 60px 80px 80px;
+    gap: 5px;
     padding: 10px;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
@@ -67,8 +67,8 @@
 
 .item-row {
     display: grid;
-    grid-template-columns: 2fr 80px 100px 100px;
-    gap: 10px;
+    grid-template-columns: 2fr 60px 80px 80px;
+    gap: 5px;
     padding: 12px 10px;
     border-bottom: 1px solid #eee;
     align-items: center;
