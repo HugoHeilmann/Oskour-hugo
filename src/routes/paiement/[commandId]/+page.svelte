@@ -44,7 +44,7 @@
 </svelte:head>
 
 <main class="app">
-    <Title text="Au secours Hugo"></Title>
+    <Title text="Paiement - Table #{commandData.tableNumber}"></Title>
     <div class="payment-page">
         {#if paymentCompleted}
             <div class="success-container">
@@ -57,10 +57,7 @@
             </div>
         {:else}
             <div class="payment-container">
-                <div class="payment-header">
-                    <h1>💳 Paiement</h1>
-                    <p class="command-info">Commande #{commandId} - Table {commandData.tableNumber}</p>
-                </div>
+                
 
                 {#if selectedPaymentMethod === ''}
                     <div class="order-summary">
