@@ -1,0 +1,521 @@
+openapi: 3.0.3
+info:
+  title: Au Secours Hugo - API Restaurant
+  version: 1.0.0
+  description: >
+    API idéale pour la gestion des commandes d'un restaurant :
+    items de nourriture, disposition des salles/tables, et paiements.
+
+servers:
+  - url: /api
+
+paths:
+  # ------------------------
+  # ITEMS (boisson / plat / dessert)
+  # ------------------------
+  /items:
+    get:
+      summary: Liste les items de nourriture
+      description: >
+        Retourne la liste des items (boissons, plats, desserts).
+        Possibilité de filtrer par type.
+      parameters:
+        - name: type
+          in: query
+          description: Type d'item (boisson, plat, dessert)
+          schema:
+            $ref: '#/components/schemas/FoodType'
+        - name: search
+          in: query
+          description: Filtre texte sur le nom ou la description
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste d'items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FoodItem'
+
+  /items/{id}:
+    get:
+      summary: Récupère le détail d'un item de nourriture
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Item trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodItem'
+        '404':
+          description: Item introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ------------------------
+  # SALLES / TABLES
+  # ------------------------
+  /rooms:
+    get:
+      summary: Liste toutes les salles du restaurant
+      description: >
+        Chaque salle peut éventuellement inclure la liste de ses tables
+        et leur disposition.
+      parameters:
+        - name: includeTables
+          in: query
+          description: Inclure les tables et leur disposition pour chaque salle
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Liste de salles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+
+  /rooms/{roomId}:
+    get:
+      summary: Détail d'une salle
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Salle avec sa disposition et éventuellement ses tables
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '404':
+          description: Salle introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /rooms/{roomId}/tables:
+    get:
+      summary: Liste les tables d'une salle
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste de tables pour la salle
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+        '404':
+          description: Salle introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /tables:
+    get:
+      summary: Liste toutes les tables du restaurant
+      parameters:
+        - name: roomId
+          in: query
+          description: Filtrer par salle
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste de tables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+
+  /tables/{tableId}:
+    get:
+      summary: Détail d'une table
+      parameters:
+        - name: tableId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails d'une table
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '404':
+          description: Table introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ------------------------
+  # PAIEMENTS
+  # ------------------------
+  /payment-methods:
+    get:
+      summary: Liste les moyens de paiement disponibles
+      description: >
+        Retourne les modes de paiement supportés : carte, espèce, mobile.
+      responses:
+        '200':
+          description: Liste des moyens de paiement
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentMethod'
+
+  /payments:
+    get:
+      summary: Liste les paiements
+      description: >
+        Permet de filtrer par table, statut et plage de dates.
+      parameters:
+        - name: tableId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/PaymentStatus'
+        - name: fromDate
+          in: query
+          description: Date de début (inclus)
+          schema:
+            type: string
+            format: date-time
+        - name: toDate
+          in: query
+          description: Date de fin (inclus)
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Liste de paiements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+
+    post:
+      summary: Crée un paiement pour une table
+      description: >
+        Enregistre un paiement pour une table donnée, avec un moyen de paiement
+        (carte, espèce, mobile).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '201':
+          description: Paiement créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Données invalides
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /payments/{paymentId}:
+    get:
+      summary: Récupère le détail d'un paiement
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paiement trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: Paiement introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      summary: Met à jour le statut d'un paiement
+      description: >
+        Permet par exemple de passer un paiement de PENDING à PAID ou CANCELLED.
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePaymentStatusRequest'
+      responses:
+        '200':
+          description: Paiement mis à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Données invalides
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Paiement introuvable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    # ------------------------
+    # ENUMS
+    # ------------------------
+    FoodType:
+      type: string
+      description: Type d'item de nourriture
+      enum:
+        - boisson
+        - plat
+        - dessert
+
+    PaymentMethod:
+      type: string
+      description: Moyen de paiement disponible
+      enum:
+        - card    # carte
+        - cash    # espèce
+        - mobile  # paiement mobile
+
+    PaymentStatus:
+      type: string
+      description: Statut du paiement
+      enum:
+        - PENDING
+        - PAID
+        - CANCELLED
+
+    # ------------------------
+    # ITEMS
+    # ------------------------
+    FoodItem:
+      type: object
+      description: Item de nourriture (boisson, plat, dessert)
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: Nom de l'item (ex. Coca-Cola, Burger...)
+        type:
+          $ref: '#/components/schemas/FoodType'
+        price:
+          type: number
+          format: float
+          description: Prix TTC de l'item
+
+    # ------------------------
+    # SALLES / TABLES
+    # ------------------------
+    Room:
+      type: object
+      description: Salle du restaurant
+      properties:
+        id:
+          type: string
+          description: Identifiant technique de la salle
+        number:
+          type: integer
+          description: Numéro de la salle (ex. 1, 2, 3)
+        name:
+          type: string
+          description: Nom affiché (ex. "Salle principale", "Terrasse")
+        layout:
+          type: object
+          description: Informations de disposition générale de la salle
+          properties:
+            rows:
+              type: integer
+              description: Nombre de lignes pour la grille de disposition (optionnel)
+            columns:
+              type: integer
+              description: Nombre de colonnes pour la grille de disposition (optionnel)
+        tables:
+          type: array
+          description: Liste des tables de la salle (présente si includeTables=true ou sur /rooms/{id})
+          items:
+            $ref: '#/components/schemas/Table'
+
+    Table:
+      type: object
+      description: Table dans une salle du restaurant
+      properties:
+        id:
+          type: string
+        roomId:
+          type: string
+        roomNumber:
+          type: integer
+          description: Numéro de la salle
+        tableNumber:
+          type: integer
+          description: Numéro de table dans la salle
+        label:
+          type: string
+          description: >
+            Libellé affiché, par ex. "105" pour salle 1, table 5.
+        capacity:
+          type: integer
+          description: Nombre de couverts maximum
+        position:
+          type: object
+          description: Position de la table dans la salle
+          properties:
+            row:
+              type: integer
+              description: Ligne de la table dans la grille de la salle
+            column:
+              type: integer
+              description: Colonne de la table dans la grille de la salle
+            x:
+              type: number
+              format: float
+              description: Coordonnée X (si position libre plutôt qu'en grille)
+            y:
+              type: number
+              format: float
+              description: Coordonnée Y (si position libre plutôt qu'en grille)
+
+    # ------------------------
+    # PAIEMENTS
+    # ------------------------
+    Payment:
+      type: object
+      description: Paiement associé à une table (et éventuellement à une commande)
+      properties:
+        id:
+          type: string
+        tableId:
+          type: string
+          description: Table concernée par le paiement
+        amount:
+          type: number
+          format: float
+          description: Montant total payé
+        method:
+          $ref: '#/components/schemas/PaymentMethod'
+        status:
+          $ref: '#/components/schemas/PaymentStatus'
+        reference:
+          type: string
+          description: Référence de commande ou commentaire libre
+        createdAt:
+          type: string
+          format: date-time
+        paidAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    CreatePaymentRequest:
+      type: object
+      required:
+        - tableId
+        - amount
+        - method
+      properties:
+        tableId:
+          type: string
+        amount:
+          type: number
+          format: float
+        method:
+          $ref: '#/components/schemas/PaymentMethod'
+        reference:
+          type: string
+          description: Référence de commande ou commentaire libre
+
+    UpdatePaymentStatusRequest:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/PaymentStatus'
+
+    # ------------------------
+    # ERREURS
+    # ------------------------
+    ErrorResponse:
+      type: object
+      description: Format standard des erreurs renvoyées par l'API
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
