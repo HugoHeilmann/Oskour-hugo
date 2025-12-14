@@ -6,6 +6,7 @@
 	import ToggleButton from '$lib/components/ToggleButton/ToggleButton.svelte';
     import FoodCard from '$lib/components/FoodCard/FoodCard.svelte';
     import FoodNavbar from '$lib/components/FoodNavbar/FoodNavbar.svelte';
+	import CommandRecap from '$lib/components/CommandRecap/CommandRecap.svelte';
 
     const dishes = [
         { id: 1, name: 'Coca-Cola', imgSrc: '', type: 'boisson' },
@@ -79,7 +80,7 @@
                 />
             </div>
         {:else if mode === 'payer'}
-            <p>Mode Payer activé pour la table {tableId}.</p>
+            <CommandRecap commandId={tableId} />
         {/if}
     </div>
 </main>

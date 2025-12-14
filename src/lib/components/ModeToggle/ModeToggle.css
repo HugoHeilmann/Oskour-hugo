@@ -1,0 +1,110 @@
+.toggle-wrapper {
+  /* --- PALETTE DE COULEURS ADAPTÉE AU SITE --- */
+  /* Couleur Dorée (similaire au bouton Confirmer) */
+  --primary-gold: #c69c6d; 
+  /* Couleur du texte sur le doré (blanc ou très sombre) */
+  --text-on-gold: #ffffff;
+  
+  /* Couleur Sombre (similaire au fond des inputs) */
+  --dark-bg: #1f2530; 
+  /* Couleur de bordure pour le mode inactif */
+  --border-color: #c69c6d; 
+
+  --toggle-bg-active: var(--primary-gold);
+  --toggle-text-active: var(--text-on-gold);
+
+  --toggle-inactive-bg: rgba(31, 37, 48, 0.8);
+  --toggle-inactive-text: #8aa4b7;
+  
+  --toggle-height: 50px;
+  --toggle-width: 100%; 
+  --toggle-max-width: 320px;
+  
+  --padding: 4px;
+}
+
+.toggle-container {
+  position: relative;
+  display: flex;
+  width: var(--toggle-width);
+  max-width: var(--toggle-max-width);
+  height: var(--toggle-height);
+  
+  background-color: var(--toggle-inactive-bg);
+  border: 1px solid var(--border-color); 
+  border-radius: 999px;
+  padding: var(--padding);
+  
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  
+  margin: 0 auto; 
+}
+
+.slider-bg {
+  position: absolute;
+  top: var(--padding);
+  left: var(--padding);
+  width: calc(50% - var(--padding));
+  height: calc(100% - (var(--padding) * 2));
+  
+  background-color: var(--toggle-bg-active); 
+  
+  border-radius: 999px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+  z-index: 1;
+}
+
+.toggle-container.expert-mode .slider-bg {
+  transform: translateX(100%);
+}
+
+.toggle-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1rem); 
+  
+  color: var(--toggle-inactive-text);
+  transition: color 0.3s ease;
+}
+
+.toggle-option.active {
+  color: var(--toggle-text-active);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.toggle-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+@media (max-width: 350px) {
+  .toggle-wrapper {
+    --toggle-height: 44px; 
+  }
+  .toggle-option {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 550px) {
+  .toggle-icon {
+    display: none;
+  }
+}

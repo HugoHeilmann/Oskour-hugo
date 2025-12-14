@@ -1,4 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const mode = writable("expert"); 
-// valeurs possibles : "expert" ou "novice"
+export const ExpertiseMode = writable("noviceMode");
+export const mode = writable("novice"); 

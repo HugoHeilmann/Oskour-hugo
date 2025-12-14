@@ -1,0 +1,49 @@
+.payment-button {
+    width: 100%;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+    margin-top: 20px;
+}
+
+.payment-button:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+.payment-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.payment-icon {
+    font-size: 20px;
+}
+
+.payment-text {
+    font-family: Arial, sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .payment-button {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .payment-icon {
+        font-size: 18px;
+    }
+}
