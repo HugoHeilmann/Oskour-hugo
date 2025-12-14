@@ -5,14 +5,11 @@
     flex-direction: column;
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, #587a1b 0, #587a1b 35%, transparent 40%),
-        radial-gradient(circle at 80% 40%, #b66527 0, #b66527 35%, transparent 40%),
-        radial-gradient(circle at 40% 80%, #3b5a1a 0, #3b5a1a 40%, transparent 45%),
-        #4a3b26;
+    background-color: #161b22;
 }
-  
-.content {
+
+/* Changement ici : .content devient .selection-content */
+.selection-content {
     flex: 1;
     display: flex;
     align-items: center;
@@ -28,17 +25,21 @@
     gap: 2rem;
     width: 100%;
     max-width: 340px;
+    background-color: #212830;
+    border-radius: 5%;
+    padding: 2% 0% 2% 0%;
 }
 
 .table-display {
     padding: 1rem 1.5rem;
     border-radius: 16px;
-    background: rgba(30, 30, 30, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: #212830;
+    border: 2px solid #c5a065;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     font-size: 1.1rem;
     min-width: 220px;
     text-align: center;
+    color: #c5ccd3;
 }
 
 .table-display span {
@@ -50,7 +51,7 @@
     padding: 0.9rem 1.5rem;
     border: none;
     border-radius: 10px;
-    background: rgba(70, 130, 180, 0.95);
+    background: #b48c50;
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
@@ -130,4 +131,8 @@
 .bottom-toggle:active {
     transform: translateY(2px);
     background: rgba(220, 220, 220, 0.95);
+}
+
+.app.novice-mode:not(.has-expert-rights) .bottom-toggle {
+    display: none;
 }

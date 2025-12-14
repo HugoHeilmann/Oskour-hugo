@@ -54,3 +54,11 @@
     font-weight: 600;
     color: #444;
 }
+
+.food-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #c5a065;
+    margin-top: 4px;
+    display: block;
+}

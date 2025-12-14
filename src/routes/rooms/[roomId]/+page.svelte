@@ -1,7 +1,9 @@
 <script>
     import './+page.css';
     import Title from '$lib/components/Title/Title.svelte';
+    import { ExpertiseMode } from '$lib/stores/appState.js';
     import { page } from '$app/stores';
+    import { goto } from '$app/navigation';
 
     const GRID_COLS = 4;
     const GRID_ROWS = 8;
@@ -162,13 +164,10 @@
         }));
     }
 
-    function goBack() {
-        history.back();
-    }
 </script>
 
 <main class="app">
-  <Title text={roomLabel} />
+  <Title text={roomLabel} ExpertiseMode={$ExpertiseMode}/>
 
   <section class="content">
     <div class="room-plan-wrapper">
@@ -179,6 +178,7 @@
           <button
             class="room-table"
             style={`grid-column: ${table.colStart} / span ${table.width}; grid-row: ${table.rowStart} / span ${table.height};`}
+            on:click={() => goto(`/manageTable/${table.id}`)}
           >
             {table.id}
           </button>
@@ -186,8 +186,4 @@
       </div>
     </div>
   </section>
-
-  <button class="bottom-toggle" on:click={goBack}>
-    RETOUR
-  </button>
 </main>

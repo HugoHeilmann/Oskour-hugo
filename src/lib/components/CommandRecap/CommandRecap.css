@@ -1,5 +1,6 @@
 .command-recap {
     max-width: 600px;
+    min-width: 30vw;
     margin: 0 auto;
     background: white;
     border-radius: 8px;
@@ -31,7 +32,6 @@
     background: white;
 }
 
-/* Style de la scrollbar */
 .items-list::-webkit-scrollbar {
     width: 8px;
 }
@@ -50,11 +50,17 @@
     background: #a8a8a8;
 }
 
+.header-row, .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 .header-row {
     position: sticky;
-    display: flex;
-    place-items: center;
-    padding: 10px;
+    top: 0;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
     color: #666;
@@ -65,30 +71,54 @@
 
 .item-row {
     max-height: 70px;
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    padding: 12px 10px;
     border-bottom: 1px solid #eee;
-    align-items: center;
 }
 
 .item-row:hover {
     background-color: #f8f9fa;
 }
 
+.header-row .item-name {
+    width: 35%;
+    text-align: left;
+    flex-shrink: 0;
+}
 .item-info {
-    width: 40%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    flex-shrink: 0;
 }
-
-.item-name {
-    width: 40%;
+.item-info .item-name {
+    width: 100%;
     font-weight: 500;
     color: #333;
 }
+
+.header-row .item-quantity {
+    width: 25%;
+    text-align: center;
+    flex-shrink: 0;
+}
+.item-quantity-wrapper {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.item-price, .item-total {
+    width: 20%;
+    text-align: right;
+    font-weight: 500;
+    color: #333;
+    flex-shrink: 0;
+}
+
+/* --- STYLES DIVERS --- */
 
 .item-category {
     font-size: 12px;
@@ -115,15 +145,43 @@
 }
 
 .item-quantity {
-    width: 20%;
+    font-weight: 600;
+    min-width: 20px;
     text-align: center;
-    font-weight: 500;
+    color: #333;
 }
 
-.item-price, .item-total {
-    width: 20%;
-    text-align: right;
-    font-weight: 500;
+.qty-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.qty-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+}
+
+.qty-btn.minus:hover {
+    background-color: #ffcccc;
+    border-color: #ff9999;
+    color: #cc0000;
+}
+
+.qty-btn.plus:hover {
+    background-color: #ccffcc;
+    border-color: #99ff99;
+    color: #006600;
 }
 
 .total-section {
@@ -148,19 +206,23 @@
     font-size: 20px;
 }
 
-/* Responsive design */
+/* RESPONSIVE */
 @media (max-width: 600px) {
     .command-recap {
         margin: 10px;
         padding: 15px;
     }
     
-    .header-row, .item-row {
-        grid-template-columns: 1.5fr 60px 80px 80px;
-        gap: 8px;
-        font-size: 14px;
+    .item-quantity-wrapper {
+        gap: 4px;
     }
     
+    .qty-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+
     .table-header h2 {
         font-size: 20px;
     }
@@ -168,5 +230,10 @@
     .item-category {
         font-size: 10px;
         padding: 1px 6px;
+    }
+    
+    .header-row, .item-row {
+        font-size: 13px;
+        padding: 8px 5px;
     }
 }
