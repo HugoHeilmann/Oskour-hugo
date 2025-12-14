@@ -1,6 +1,6 @@
 <script>
     import PaymentHeader from "../PaymentHeader/PaymentHeader.svelte";
-import "./CardPayment.css";
+    import "./CardPayment.css";
     
     export let amount = 0;
     export let onBack = () => {};

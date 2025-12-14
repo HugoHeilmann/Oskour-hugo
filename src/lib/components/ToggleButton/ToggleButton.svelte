@@ -16,7 +16,7 @@
     }
 </script>
 
-<div class="toggle-container">
+<div class="toggle-button-container">
 	<button
 		class:selected={value === 'commander'}
 		on:click={() => setValue('commander')}

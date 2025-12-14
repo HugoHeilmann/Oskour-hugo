@@ -26,12 +26,13 @@
 <nav class="navbar">
 	{#each items as item}
 		<button
+            id="foodNavbar"
 			type="button"
 			class:selected={foodType === item.id}
 			on:click={() => select(item.id)}
 		>
-			<span class="icon">{item.icon}</span>
-			<span class="label">{item.label}</span>
+			<span id="icon">{item.icon}</span>
+			<span id="label">{item.label}</span>
 		</button>
 	{/each}
 </nav>

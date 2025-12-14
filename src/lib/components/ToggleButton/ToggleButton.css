@@ -1,10 +1,10 @@
-.toggle-container {
+.toggle-button-container {
     width: 90%;
     place-self: center;
     display: flex;
     background: #1a1a1a;
     border-radius: 14px;
-    padding: 4px;
+    padding: 1%;
     gap: 4px;
     box-shadow: 0 0 8px rgba(0,0,0,0.4);
 }

@@ -6,23 +6,21 @@
     import Keypad from '$lib/components/Keypad/Keypad.svelte';
     import RoomSelector from '$lib/components/RoomSelector/RoomSelector.svelte';
 
+    import { ExpertiseMode } from '$lib/stores/appState.js';
     import { mode } from '$lib/stores/appState.js';
 
     let tableNumber = '';
 
-    
-    /**
-     * Toggle between expert mode (numeric keypad) and novice mode (table map).
-     */
     function toggleMode() {
         mode.set($mode === 'expert' ? 'novice' : 'expert');
         tableNumber = '';
     }
 
-    /**
-     * Handle a key press from the numeric keypad.
-	 * @param {string} key - The key that was pressed on the keypad.
-	 */
+    function setModeFromTitle(event) {
+        ExpertiseMode.set(event.detail);
+        tableNumber = '';
+    }
+
     function pressKey(key) {
         if (key === 'C') {
             clearTable();
@@ -33,36 +31,34 @@
             return;
         }
         if (tableNumber.length < 3) {
-            tableNumber += key
+            tableNumber += key;
         }
     }
 
-    /**
-     * Remove the last character from the current table number.
-     */
     function backspace() {
         tableNumber = tableNumber.slice(0, -1);
     }
 
-    /**
-     * Clear the current table number.
-     */
     function clearTable() {
         tableNumber = '';
     }
 
-    // TODO GERER LE CHANGEMENT DE PAGE AVEC LE NUMERO DE TABLE
-    // LORSQUE LE BOUTON CONFIRMER EST CLIQUE
-
     $: displayTable = tableNumber.padStart(3, '0');
+        $: {
+        if ($ExpertiseMode === 'expertMode') {
+            mode.set('expert');
+        } else if ($ExpertiseMode === 'noviceMode') {
+            mode.set('novice');
+        }
+    }
+
 </script>
 
-<main class="app">
-  <Title/>
-
-  <section class="content">
+<main class="app" class:expert-mode={$mode === 'expert'} class:novice-mode={$mode === 'novice'} class:has-expert-rights={$ExpertiseMode === 'expertMode'}>
+  <Title text="Sélectionner une table" ExpertiseMode={$ExpertiseMode} on:change={setModeFromTitle} />
+  
+  <section class="selection-content">
     {#if $mode === 'expert'}
-      <!-- MODE EXPERT : Clavier numérique -->
       <div class="expert-container">
         <div class="table-display">
           <span>Table n° {displayTable}</span>
@@ -78,14 +74,12 @@
       </div>
 
     {:else}
-      <!-- MODE NOVICE : demande de la salle puis map pour choisir la table -->
       <div class="novice-first-step">
         <RoomSelector />
       </div>
     {/if}
   </section>
 
-  <!-- Bouton toggle qui sert à switcher de mode -->
   <button class="bottom-toggle" on:click={toggleMode}>
     {#if $mode === 'expert'}
       Carte de la salle

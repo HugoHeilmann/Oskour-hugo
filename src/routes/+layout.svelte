@@ -11,12 +11,26 @@
 {@render children()}
 
 <style>
+:root {
+        --bg-main: rgb(22, 27, 34);
+        --bg-card: rgb(33, 40, 48);
+        
+        --accent-gold: rgb(197, 160, 101);
+        --accent-gold-dim: rgba(197, 160, 101, 0.2);
+        
+        --text-main: rgb(240, 240, 240);
+        --text-muted: rgb(160, 170, 180);
+    }
+
     :global(html, body) {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
-        font-family: Arial, sans-serif;
+        background-color: #161b22;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+
     }
 
     :global(#svelte) {
