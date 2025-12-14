@@ -115,28 +115,36 @@
      */
     function addToOrder(dish) {
         commands.update(currentCommands => {
-            // Initialiser si undefined
-            if (!currentCommands) currentCommands = [];
+            // Créer une copie du tableau pour forcer la réactivité
+            let newCommands = [...(currentCommands || [])];
 
             // 1. Chercher si une commande existe pour cette table
-            let command = currentCommands.find(c => c.tableNumber === tableId);
+            let commandIndex = newCommands.findIndex(c => c.tableNumber === tableId);
 
-            if (!command) {
+            if (commandIndex === -1) {
                 // 2. Si elle n'existe pas, on la crée
-                command = {
-                    commandId: Date.now(), // ID unique simple
+                const newCommand = {
+                    commandId: Date.now(),
                     tableNumber: tableId,
                     items: []
                 };
-                currentCommands.push(command);
+                newCommands.push(newCommand);
+                commandIndex = newCommands.length - 1;
             }
 
-            // 3. Chercher si l'item est déjà dans la commande
-            const existingItem = command.items.find(item => item.name === dish.name);
+            // Récupérer la commande (copie superficielle par sécurité)
+            let command = newCommands[commandIndex];
 
-            if (existingItem) {
+            // 3. Chercher si l'item est déjà dans la commande
+            const itemIndex = command.items.findIndex(item => item.name === dish.name);
+
+            if (itemIndex !== -1) {
                 // Si oui, on incrémente la quantité
-                existingItem.quantity += 1;
+                // NOTE : On recrée l'objet item pour que Svelte détecte le changement interne
+                command.items[itemIndex] = {
+                    ...command.items[itemIndex],
+                    quantity: command.items[itemIndex].quantity + 1
+                };
             } else {
                 // Si non, on l'ajoute
                 command.items.push({
@@ -149,7 +157,7 @@
                 });
             }
 
-            return currentCommands;
+            return newCommands;
         });
     }
 
