@@ -11,27 +11,16 @@
 
     let tableNumber = '';
 
-    /**
-     * Bascule entre le mode expert et novice.
-     */
     function toggleMode() {
         mode.set($mode === 'expert' ? 'novice' : 'expert');
         tableNumber = '';
     }
 
-    /**
-     * Met à jour le mode depuis le header.
-     * @param {CustomEvent<'expert' | 'novice'>} event
-     */
     function setModeFromTitle(event) {
         ExpertiseMode.set(event.detail);
         tableNumber = '';
     }
 
-    /**
-     * Gère l'appui sur une touche du clavier numérique.
-     * @param {string} key
-     */
     function pressKey(key) {
         if (key === 'C') {
             clearTable();
@@ -66,8 +55,9 @@
 </script>
 
 <main class="app" class:expert-mode={$mode === 'expert'} class:novice-mode={$mode === 'novice'} class:has-expert-rights={$ExpertiseMode === 'expertMode'}>
-  <Title text="Sélectionner une table" {ExpertiseMode} on:change={setModeFromTitle} />
-  <section class="content">
+  <Title text="Sélectionner une table" ExpertiseMode={$ExpertiseMode} on:change={setModeFromTitle} />
+  
+  <section class="selection-content">
     {#if $mode === 'expert'}
       <div class="expert-container">
         <div class="table-display">

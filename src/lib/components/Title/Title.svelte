@@ -4,17 +4,17 @@
     import { createEventDispatcher } from 'svelte';
     
     export let text = "Au secours Hugo";
-    export let mode: 'novice' | 'expert' = 'novice'; 
+    export let ExpertiseMode: 'noviceMode' | 'expertMode' = 'noviceMode';
 
     import ModeToggle from '../ModeToggle/ModeToggle.svelte';
     import ReturnButton from "../ReturnButton/ReturnButton.svelte"; 
 
     const dispatch = createEventDispatcher();
 
-    function handleModeChange(event: CustomEvent<'novice' | 'expert'>) {
-        mode = event.detail;
-        dispatch('change', mode);
-        console.log("Nouveau mode :", mode);
+    function handleModeChange(event: CustomEvent<'noviceMode' | 'expertMode'>) {
+        ExpertiseMode = event.detail;
+        dispatch('change', ExpertiseMode);
+        console.log("Nouveau mode :", ExpertiseMode);
     }
 
     $: void $page.url;
@@ -23,5 +23,5 @@
 <div class="title">
     <ReturnButton href="/"/>
     <p>{text}</p>
-    <ModeToggle {mode} on:change={handleModeChange} />
+    <ModeToggle {ExpertiseMode} on:change={handleModeChange} />
 </div>

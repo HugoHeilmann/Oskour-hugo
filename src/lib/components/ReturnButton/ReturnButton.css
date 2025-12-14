@@ -1,14 +1,29 @@
-
 .return-button {
-    padding: 0.5rem 1rem;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background-color: var(--bg-card, rgb(33, 40, 48));
+    border: 1px solid var(--accent-gold, rgb(197, 160, 101));
+    color: var(--text-main, rgb(240, 240, 240));
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    font-weight: 600;
+    padding: clamp(0.4rem, 1.5vw, 0.6rem) clamp(0.8rem, 3vw, 1.2rem);
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease-out;
+    max-width: max-content;
 }
 
-.return-button:hover {
-    background-color: #e0e0e0;
+.return-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+    opacity: 0.9;
 }
 
+@media (max-width: 480px) {
+    .return-button {
+        padding: 0.4rem 0.8rem; 
+        white-space: nowrap;
+    }
+}

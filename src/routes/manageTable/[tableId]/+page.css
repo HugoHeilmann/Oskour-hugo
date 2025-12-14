@@ -1,3 +1,13 @@
+#app-layout {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #161b22;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -21,6 +31,7 @@
     flex-direction: column;
     gap: 10px;
     background: transparent;
+    width: 100vw;
 }
 
 .code-input {
@@ -45,3 +56,16 @@
 .code-input:focus {
     box-shadow: 0 0 6px rgba(255,255,255,0.4);
 }
+
+.dishes-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+@media (max-width: 849px) {
+    .dishes-container > div:last-child {
+        display: none;
+    }
+}
+

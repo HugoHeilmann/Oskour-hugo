@@ -41,7 +41,7 @@
             <path d="M2 22c5-3 8-7 8-7"></path>
             </svg>
         </span>
-        <span class="label">Novice</span>
+        <span id="label-mode">Novice</span>
         </button>
 
         <button 
@@ -49,7 +49,7 @@
         class:active={ExpertiseMode === 'expertMode'}
         on:click|stopPropagation={() => setMode('expertMode')}
         >
-        <span class="label">Expert</span>
+        <span id="label-mode">Expert</span>
         <span class="toggle-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>

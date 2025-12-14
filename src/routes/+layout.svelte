@@ -27,6 +27,10 @@
         padding: 0;
         width: 100%;
         height: 100%;
+        background-color: #161b22;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+
     }
 
     :global(#svelte) {

@@ -1,47 +1,35 @@
 .toggle-wrapper {
-  /* --- PALETTE DE COULEURS ADAPTÉE AU SITE --- */
-  /* Couleur Dorée (similaire au bouton Confirmer) */
-  --primary-gold: #c69c6d; 
-  /* Couleur du texte sur le doré (blanc ou très sombre) */
-  --text-on-gold: #ffffff;
-  
-  /* Couleur Sombre (similaire au fond des inputs) */
-  --dark-bg: #1f2530; 
-  /* Couleur de bordure pour le mode inactif */
-  --border-color: #c69c6d; 
-
-  --toggle-bg-active: var(--primary-gold);
-  --toggle-text-active: var(--text-on-gold);
-
-  --toggle-inactive-bg: rgba(31, 37, 48, 0.8);
-  --toggle-inactive-text: #8aa4b7;
-  
-  --toggle-height: 50px;
-  --toggle-width: 100%; 
-  --toggle-max-width: 320px;
-  
-  --padding: 4px;
+    --primary-gold: #c69c6d; 
+    --text-on-gold: #ffffff;
+    --dark-bg: #1f2530; 
+    --border-color: #c69c6d; 
+    --toggle-bg-active: var(--primary-gold);
+    --toggle-text-active: var(--text-on-gold);
+    --toggle-inactive-bg: rgba(31, 37, 48, 0.8);
+    --toggle-inactive-text: #8aa4b7;   
+    --toggle-height: 50px;
+    --toggle-width: 100%; 
+    --toggle-max-width: 320px;  
+    --padding: 4px;
+    width: 15vw;
 }
 
 .toggle-container {
-  position: relative;
-  display: flex;
-  width: var(--toggle-width);
-  max-width: var(--toggle-max-width);
-  height: var(--toggle-height);
-  
-  background-color: var(--toggle-inactive-bg);
-  border: 1px solid var(--border-color); 
-  border-radius: 999px;
-  padding: var(--padding);
-  
-  cursor: pointer;
-  user-select: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  
-  margin: 0 auto; 
+    position: relative;
+    display: flex;
+    width: var(--toggle-width);
+    max-width: var(--toggle-max-width);
+    height: var(--toggle-height);
+    background-color: var(--toggle-inactive-bg);
+    border: 1px solid var(--border-color); 
+    border-radius: 999px;
+    padding: var(--padding);
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin: 0 auto; 
 }
 
 .slider-bg {
@@ -103,8 +91,8 @@
   }
 }
 
-@media (max-width: 550px) {
-  .toggle-icon {
+@media (max-width: 1100px) {
+  #label-mode {
     display: none;
   }
 }
