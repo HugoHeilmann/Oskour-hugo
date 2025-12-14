@@ -57,6 +57,14 @@
         ? initialDivisionAmount / parseInt(divisorNumber) 
         : (selectedAmount > 0 ? selectedAmount : remainingAmount);
     
+    // Vérification réactive pour détecter la fin du paiement
+    $: if (remainingAmount <= 0.01 && !paymentCompleted && !isProcessing && commandData) {
+        paymentCompleted = true;
+        setTimeout(() => {
+            onSuccess();
+        }, 3000);
+    }
+    
     /**
      * Handle a key press from the numeric keypad.
      * @param {string} key - The key that was pressed on the keypad.
@@ -185,25 +193,21 @@
             
             isProcessing = false;
             
-            // Vérifier si le paiement est complet après ce paiement
-            const newRemainingAmount = totalCommand - paidAmount - partialPayments;
-            if (newRemainingAmount <= 0.01) { // Petite tolérance pour les arrondis
-                paymentCompleted = true;
-                // Redirection après 3 secondes
-                setTimeout(() => {
-                    goto('/selectTable');
-                }, 3000);
-            }
+            // La vérification de fin de paiement se fait maintenant automatiquement
+            // via la réactivité de remainingAmount
         }, 2000);
     }
 </script>
 
 <div class="card-payment">
     {#if paymentCompleted}
-        <div class="payment-completed">
-            <div class="completed-icon">✅</div>
-            <h2>Paiement effectué</h2>
-            <p>Redirection en cours...</p>
+        <div class="success-container">
+            <div class="success-content">
+                <div class="success-icon">✓</div>
+                <h1>Paiement réussi !</h1>
+                <p>Merci pour votre commande</p>
+                <p class="redirect-info">Redirection en cours...</p>
+            </div>
         </div>
     {:else}
     <!-- Header avec totaux -->
