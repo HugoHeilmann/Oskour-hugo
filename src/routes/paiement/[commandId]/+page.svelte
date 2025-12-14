@@ -58,7 +58,7 @@
 </svelte:head>
 
 <main class="app">
-    <Title text="Paiement - Table #{commandData.tableNumber}"></Title>
+    <Title text="Au secours Hugo"></Title>
     <div class="payment-page">
         {#if paymentCompleted}
             <div class="success-container">
@@ -71,37 +71,47 @@
             </div>
         {:else}
             <div class="payment-container">
-                {#if selectedPaymentMethod === ''}
-                    <div class="order-summary">
-                        <h2>Résumé de la commande</h2>
-                        <div class="category-summary">
-                            {#if categorySummary.plat > 0}
-                                <div class="category-item">
-                                    <span class="category-icon">🍽️</span>
-                                    <span class="category-text">{categorySummary.plat} plat{categorySummary.plat > 1 ? 's' : ''}</span>
-                                </div>
-                            {/if}
-                            {#if categorySummary.boisson > 0}
-                                <div class="category-item">
-                                    <span class="category-icon">🥤</span>
-                                    <span class="category-text">{categorySummary.boisson} boisson{categorySummary.boisson > 1 ? 's' : ''}</span>
-                                </div>
-                            {/if}
-                            {#if categorySummary.dessert > 0}
-                                <div class="category-item">
-                                    <span class="category-icon">🍰</span>
-                                    <span class="category-text">{categorySummary.dessert} dessert{categorySummary.dessert > 1 ? 's' : ''}</span>
-                                </div>
-                            {/if}
-                        </div>
-                        <div class="summary-total">
-                            <strong>Total : {total.toFixed(2)}€</strong>
+                {#if selectedPaymentMethod === '' || selectedPaymentMethod === 'cash' || selectedPaymentMethod === 'mobile'}
+                    <div class="payment-header">
+                        <h1>💳 Paiement</h1>
+                        <p class="command-info">Commande #{commandId} - Table {commandData ? commandData.tableNumber : '?'}</p>
+                    </div>
+                {/if}
+
+                {#if commandData}
+                    {#if selectedPaymentMethod === ''}
+                        <div class="order-summary">
+                            <h2>Résumé de la commande</h2>
+                            <div class="category-summary">
+                                {#if categorySummary.plat > 0}
+                                    <div class="category-item">
+                                        <span class="category-icon">🍽️</span>
+                                        <span class="category-text">{categorySummary.plat} plat{categorySummary.plat > 1 ? 's' : ''}</span>
+                                    </div>
+                                {/if}
+                                {#if categorySummary.boisson > 0}
+                                    <div class="category-item">
+                                        <span class="category-icon">🥤</span>
+                                        <span class="category-text">{categorySummary.boisson} boisson{categorySummary.boisson > 1 ? 's' : ''}</span>
+                                    </div>
+                                {/if}
+                                {#if categorySummary.dessert > 0}
+                                    <div class="category-item">
+                                        <span class="category-icon">🍰</span>
+                                        <span class="category-text">{categorySummary.dessert} dessert{categorySummary.dessert > 1 ? 's' : ''}</span>
+                                    </div>
+                                {/if}
+                            </div>
+                            <div class="summary-total">
+                                <strong>Total : {total.toFixed(2)}€</strong>
+                            </div>
                         </div>
                         
                         <PaymentMethods onPaymentSelect={handlePaymentSelect} />
                     {:else if selectedPaymentMethod === 'card'}
                         <CardPayment 
                             amount={total} 
+                            tableNumber={commandData ? commandData.tableNumber.toString() : ''}
                             onBack={handleBack} 
                             onSuccess={handlePaymentSuccess} 
                         />
@@ -123,27 +133,6 @@
                         <p>Commande introuvable ou déjà payée.</p>
                         <button on:click={() => goto('/selectTable')} style="padding: 10px; cursor: pointer;">Retour à l'accueil</button>
                     </div>
-                    
-                    <PaymentMethods onPaymentSelect={handlePaymentSelect} />
-                {:else if selectedPaymentMethod === 'card'}
-                    <CardPayment 
-                        amount={total} 
-                        onBack={handleBack} 
-                        onSuccess={handlePaymentSuccess} 
-                        tableNumber={commandData.tableNumber}
-                    />
-                {:else if selectedPaymentMethod === 'cash'}
-                    <CashPayment 
-                        amount={total} 
-                        onBack={handleBack} 
-                        onSuccess={handlePaymentSuccess} 
-                    />
-                {:else if selectedPaymentMethod === 'mobile'}
-                    <MobilePayment 
-                        amount={total} 
-                        onBack={handleBack} 
-                        onSuccess={handlePaymentSuccess} 
-                    />
                 {/if}
             </div>
         {/if}

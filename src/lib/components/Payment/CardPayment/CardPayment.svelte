@@ -1,7 +1,7 @@
 <script>
     import PaymentHeader from "../PaymentHeader/PaymentHeader.svelte";
     import Keypad from '$lib/components/Keypad/Keypad.svelte';
-    import mockCommands from '$lib/data/mockCommand.json';
+    import { commands } from '$lib/stores/appState.js';
     import { goto } from '$app/navigation';
     import "./CardPayment.css";
     
@@ -20,13 +20,13 @@
     let initialDivisionAmount = 0; // Montant initial à diviser
     let paymentCompleted = false; // Paiement terminé
     
-    // Trouve la commande correspondante
+    // Trouve la commande correspondante dans le store
     $: {
         const tableNum = parseInt(tableNumber);
-        commandData = mockCommands.find(cmd => cmd.tableNumber === tableNum) || mockCommands[0];
+        commandData = ($commands || []).find(cmd => cmd.tableNumber === tableNum) || ($commands || [])[0];
         // Assurer qu'on a toujours une commande par défaut
-        if (!commandData && mockCommands.length > 0) {
-            commandData = mockCommands[0];
+        if (!commandData && ($commands || []).length > 0) {
+            commandData = ($commands || [])[0];
         }
     }
     console.log('Command Data:', commandData, tableNumber);
@@ -87,7 +87,7 @@
         // Mise à jour de commandId basé sur le numéro de table
         if (tableNumber.length > 0) {
             const tableNum = parseInt(tableNumber) || 1;
-            const foundCommand = mockCommands.find(cmd => cmd.tableNumber === tableNum);
+            const foundCommand = ($commands || []).find(cmd => cmd.tableNumber === tableNum);
             if (foundCommand) {
                 commandId = foundCommand.commandId;
             }
@@ -237,7 +237,7 @@
     <!-- Récapitulatif de commande -->
     {#if tableNumber && commandData && commandData.tableNumber === parseInt(tableNumber) && !isDividing}
         <div class="command-recap">
-            <h3>Commande Table {commandData.tableNumber}</h3>
+            <!--<h3>Commande Table {commandData.tableNumber}</h3>-->
             <div class="items-list">
                 <div class="header-row">
                     <span class="item-name">Plat</span>
