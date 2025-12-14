@@ -57,8 +57,6 @@
             </div>
         {:else}
             <div class="payment-container">
-                
-
                 {#if selectedPaymentMethod === ''}
                     <div class="order-summary">
                         <h2>Résumé de la commande</h2>
@@ -93,6 +91,7 @@
                         amount={total} 
                         onBack={handleBack} 
                         onSuccess={handlePaymentSuccess} 
+                        tableNumber={commandData.tableNumber}
                     />
                 {:else if selectedPaymentMethod === 'cash'}
                     <CashPayment 
