@@ -165,6 +165,14 @@
         const handleResize = () => { windowWidth = window.innerWidth; };
         handleResize();
         window.addEventListener('resize', handleResize);
+        const currentCommand = $commands.find(c => c.tableNumber === tableId);
+        if (currentCommand) {
+            const hasDessert = currentCommand.items.some(item => item.category === 'dessert');
+            if (hasDessert) {
+                orderState = 'payer';
+                toggleMode.set('payer');
+            }
+        }
         return () => window.removeEventListener('resize', handleResize);
     });
 
