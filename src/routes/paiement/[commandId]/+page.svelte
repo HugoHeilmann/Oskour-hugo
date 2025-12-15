@@ -71,10 +71,12 @@
             </div>
         {:else}
             <div class="payment-container">
-                <div class="payment-header">
-                    <h1>💳 Paiement</h1>
-                    <p class="command-info">Commande #{commandId} - Table {commandData ? commandData.tableNumber : '?'}</p>
-                </div>
+                {#if selectedPaymentMethod === '' || selectedPaymentMethod === 'cash' || selectedPaymentMethod === 'mobile'}
+                    <div class="payment-header">
+                        <h1>💳 Paiement</h1>
+                        <p class="command-info">Commande #{commandId} - Table {commandData ? commandData.tableNumber : '?'}</p>
+                    </div>
+                {/if}
 
                 {#if commandData}
                     {#if selectedPaymentMethod === ''}
@@ -109,6 +111,7 @@
                     {:else if selectedPaymentMethod === 'card'}
                         <CardPayment 
                             amount={total} 
+                            tableNumber={commandData ? commandData.tableNumber.toString() : ''}
                             onBack={handleBack} 
                             onSuccess={handlePaymentSuccess} 
                         />

@@ -1,5 +1,6 @@
 <script>
     import PaymentHeader from "../PaymentHeader/PaymentHeader.svelte";
+    import Keypad from '$lib/components/Keypad/Keypad.svelte';
 import "./CashPayment.css";
     
     export let amount = 0;
@@ -29,6 +30,26 @@ import "./CashPayment.css";
     function addAmount(value) {
         const current = parseFloat(receivedAmount) || 0;
         receivedAmount = (current + Number(value)).toFixed(2);
+    }
+    
+    function pressKey(key) {
+        if (key === 'C') {
+            receivedAmount = '';
+            return;
+        }
+        if (key === '←') {
+            if (receivedAmount.length > 0) {
+                receivedAmount = receivedAmount.slice(0, -1);
+            }
+            return;
+        }
+        
+        // Ajouter le chiffre ou le point décimal
+        if (key === '.' && receivedAmount.includes('.')) {
+            return; // Ne pas permettre deux points
+        }
+        
+        receivedAmount += key;
     }
     
     function confirmPayment() {
@@ -63,14 +84,8 @@ import "./CashPayment.css";
             </div>
         </div>
         
-        <div class="quick-amounts">
-            <h3>Montants rapides</h3>
-            <div class="amount-buttons">
-                <button on:click={() => addAmount(5)}>+5€</button>
-                <button on:click={() => addAmount(10)}>+10€</button>
-                <button on:click={() => addAmount(20)}>+20€</button>
-                <button on:click={() => addAmount(50)}>+50€</button>
-            </div>
+        <div class="keypad-section">
+            <Keypad {pressKey} />
         </div>
         
         {#if receivedAmount && parseFloat(receivedAmount) >= amount}
