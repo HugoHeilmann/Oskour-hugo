@@ -8,6 +8,8 @@
 
     import { ExpertiseMode } from '$lib/stores/appState.js';
     import { mode } from '$lib/stores/appState.js';
+	import { onMount } from 'svelte';
+	import TableGrid from '$lib/components/TableGrid/TableGrid.svelte';
 
     let tableNumber = '';
 
@@ -52,13 +54,32 @@
         }
     }
 
+    let isBig = false;
+    onMount(()=>{
+      isBig = window.matchMedia('(min-width: 800px)').matches;
+    })
+
+    const allRooms = [
+        { id: 'salle-1', label: 'Salle 1' },
+        { id: 'salle-2', label: 'Salle 2' },
+        { id: 'salle-3', label: 'Salle 3' },
+        { id: 'terrasse', label: 'Terrasse' },
+        { id: 'salon-prive', label: 'Salon privé' }
+    ];
+
 </script>
 
 <main class="app" class:expert-mode={$mode === 'expert'} class:novice-mode={$mode === 'novice'} class:has-expert-rights={$ExpertiseMode === 'expertMode'}>
   <Title text="Sélectionner une table" ExpertiseMode={$ExpertiseMode} on:change={setModeFromTitle} />
   
   <section class="selection-content">
-    {#if $mode === 'expert'}
+    {#if isBig}
+      <div class="room-list-container">
+        {#each allRooms as room}
+            <TableGrid roomId={room.id} roomLabel={room.label} />
+        {/each}
+      </div>
+    {:else if $mode === 'expert'}
       <div class="expert-container">
         <div class="table-display">
           <span>Table n° {displayTable}</span>
@@ -81,7 +102,9 @@
   </section>
 
   <button class="bottom-toggle" on:click={toggleMode}>
-    {#if $mode === 'expert'}
+    {#if isBig}
+      Carte de la salle
+    {:else if $mode === 'expert'}
       Carte de la salle
     {:else}
       Sélection par numéro

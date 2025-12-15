@@ -179,17 +179,23 @@
     function setModeFromTitle(event) {
         ExpertiseMode.set(event.detail);
     }
+
+    let isBig = false;
+    onMount(()=>{
+      isBig = window.matchMedia('(min-width: 800px)').matches;
+    })
 </script>
 
 <main class="app" id="app-layout" class:has-expert-rights={$ExpertiseMode === 'expertMode'}>
     <Title text={titleText} ExpertiseMode={$ExpertiseMode} on:change={setModeFromTitle} />
 
-    <ToggleButton bind:value={orderState}
-        on:change={(e) => {
-            orderState = e.detail.value;
-            toggleMode.set(e.detail.value);
-        }}
-    />
+        <ToggleButton bind:value={orderState}
+            on:change={(e) => {
+                orderState = e.detail.value;
+                toggleMode.set(e.detail.value);
+            }}
+        />
+
 
     <div class="content">
         {#if orderState === 'commander'}

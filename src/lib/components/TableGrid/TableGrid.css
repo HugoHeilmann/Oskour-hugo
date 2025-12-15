@@ -1,0 +1,103 @@
+/* Wrapper de la grille */
+.room-plan-wrapper {
+    width: 85%;
+    max-width: 360px;
+    padding: 1.5rem 1.25rem;
+    border-radius: 26px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Chip du nom de la salle */
+.room-chip {
+    align-self: flex-start;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    background: rgba(245, 245, 245, 0.9);
+    color: #222;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Grille des tables */
+.room-grid {
+    display: grid;
+    grid-auto-rows: 2.6rem;
+    column-gap: 0.9rem;
+    row-gap: 1rem;
+    width: 100%;
+}
+
+/* Boutons des tables */
+.room-table {
+    border: none;
+    border-radius: 16px;
+    background: rgba(246, 242, 232, 0.96);
+    color: #222;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, background 0.15s ease-out;
+}
+
+.room-table:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+    background: rgba(236, 230, 216, 0.98);
+}
+
+/* Toggle ou bouton en bas si nécessaire */
+.bottom-toggle {
+    margin-top: auto;
+    border: none;
+    width: 100%;
+    padding: 0.9rem 1rem 1.1rem;
+    border-radius: 18px 18px 0 0;
+    background: rgba(240, 240, 240, 0.9);
+    color: #222;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.4);
+    transition: background 0.15s ease-out, transform 0.08s ease-out;
+}
+
+.bottom-toggle:active {
+    transform: translateY(2px);
+    background: rgba(220, 220, 220, 0.95);
+}
+
+/* --- MEDIA QUERY MOBILE --- */
+@media (max-width: 849px) {
+    .room-plan-wrapper {
+        width: 95%;
+        padding: 1rem;
+        border-radius: 18px;
+    }
+
+    .room-grid {
+        grid-auto-rows: 2.2rem;
+        column-gap: 0.7rem;
+        row-gap: 0.8rem;
+    }
+
+    .room-chip {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+    }
+
+    .room-table {
+        font-size: 0.8rem;
+    }
+}
