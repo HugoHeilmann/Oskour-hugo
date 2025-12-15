@@ -85,7 +85,7 @@
         { id: 71, code: 'd23', name: 'Clafoutis Cerises', imgSrc: '/src/lib/assets/glace.jpg', type: 'dessert', price: 6.0 },
         { id: 72, code: 'd24', name: 'Opéra', imgSrc: '/src/lib/assets/glace.jpg', type: 'dessert', price: 8.0 },
     ];
-
+    
     /** @type {number} */
     let tableId = -1;
     /** @type {string} */
@@ -98,15 +98,34 @@
 
     $: tableId = Number($page.params.tableId ?? -1);
     $: filteredDishes = filterDishes(search, foodCategory);
-    $: titleText = windowWidth < 600 ? `Table : ${tableId}` : `Commande de la table : ${tableId}`;
+    $: titleText = windowWidth < 600 ?
+        `Table : ${tableId}` : `Commande de la table : ${tableId}`;
 
     function filterDishes(searchText, foodCategory) {
         const filteredByType = dishes.filter(d => d.type === foodCategory);
         const query = searchText.trim().toLowerCase();
         if (query === '') return filteredByType;
-        return filteredByType.filter(d =>
-            d.name.toLowerCase().includes(query) || String(d.id).includes(query)
+            return filteredByType.filter(d =>
+            d.name.toLowerCase().includes(query) || 
+            String(d.id).includes(query) ||
+            d.code.toLowerCase().includes(query)
         )
+    }
+
+    function handleKeydown(event) {
+        if (event.key === 'Enter') {
+            const query = search.trim().toLowerCase();
+            if (!query) return;
+            const dish = dishes.find(d => 
+                d.code.toLowerCase() === query || 
+                d.name.toLowerCase() === query
+            );
+            
+            if (dish) {
+                addToOrder(dish);
+                search = '';
+            }
+        }
     }
 
     /**
@@ -115,14 +134,10 @@
      */
     function addToOrder(dish) {
         commands.update(currentCommands => {
-            // Créer une copie du tableau pour forcer la réactivité
             let newCommands = [...(currentCommands || [])];
-
-            // 1. Chercher si une commande existe pour cette table
             let commandIndex = newCommands.findIndex(c => c.tableNumber === tableId);
 
             if (commandIndex === -1) {
-                // 2. Si elle n'existe pas, on la crée
                 const newCommand = {
                     commandId: Date.now(),
                     tableNumber: tableId,
@@ -131,22 +146,15 @@
                 newCommands.push(newCommand);
                 commandIndex = newCommands.length - 1;
             }
-
-            // Récupérer la commande (copie superficielle par sécurité)
             let command = newCommands[commandIndex];
-
-            // 3. Chercher si l'item est déjà dans la commande
             const itemIndex = command.items.findIndex(item => item.name === dish.name);
-
+            
             if (itemIndex !== -1) {
-                // Si oui, on incrémente la quantité
-                // NOTE : On recrée l'objet item pour que Svelte détecte le changement interne
                 command.items[itemIndex] = {
                     ...command.items[itemIndex],
                     quantity: command.items[itemIndex].quantity + 1
                 };
             } else {
-                // Si non, on l'ajoute
                 command.items.push({
                     id: dish.id,
                     name: dish.name,
@@ -218,14 +226,14 @@
                     <input 
                         class="code-input" 
                         type="text" 
-                        placeholder="Taper le code..."
+                        placeholder="Taper le code ou le nom..."
                         bind:value={search}    
+                        on:keydown={handleKeydown}
                     />
                 {/if}
-
                 <FoodNavbar bind:foodType={foodCategory}
-                    on:select={(e) => foodCategory = e.detail.foodType}
-                />
+                on:select={(e) => foodCategory = e.detail.foodType}
+                />                
             </div>
         {:else if orderState === 'payer'}
             <CommandRecap tableId={tableId} />
