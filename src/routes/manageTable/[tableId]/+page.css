@@ -67,5 +67,13 @@
     .dishes-container > div:last-child {
         display: none;
     }
+    .code-input {
+        display: flex;
+    }
 }
 
+@media (min-width: 849px) {
+    .code-input {
+        display: none;
+    }
+}
