@@ -8,12 +8,15 @@
     background-color: #161b22;
 }
 
+
+
 .content {
     display: flex;
     flex-direction: column;
     flex: 1;
     overflow: hidden;
 }
+
 
 .dishes {
     flex: 1;
@@ -72,8 +75,43 @@
     }
 }
 
+@media (min-width: 850px) {
+    .content {
+        flex-direction: row;
+        overflow: hidden;
+    }
+
+    .bottom-area {
+        width: 200px !important;
+    }
+
+    .navbar{
+        flex-direction: column;
+        height: 100%;
+        align-items: center !important;
+    }
+
+    .navbar button {
+        width : 200px;
+    }
+    
+    .navbar button #icon{
+        font-size: 4em;
+    }
+
+    .navbar button #label{
+        font-size: 2em;
+        margin-top: .5em;
+    }
+
+    .dishes-container{
+        height: 100%;
+    }
+
+}
 @media (min-width: 849px) {
     .code-input {
         display: none;
     }
 }
+
